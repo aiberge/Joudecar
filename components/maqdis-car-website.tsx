@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Phone, Copy, MessageCircle, Truck, Mail } from 'lucide-react'
 import Image from 'next/image'
@@ -31,7 +31,7 @@ const cars: Car[] = [
     id: 1,
     name: 'Kia Picanto',
     version: 'Base',
-    type: 'Économique',
+    type: 'Économique', 
     price: 249,
     image: '/kia.jpg',
     featured: true,
@@ -42,38 +42,6 @@ const cars: Car[] = [
     fuel: 'Essence',
     maxSpeed: 160,
     trunkSize: 255
-  },
-  {
-    id: 2,
-    name: 'Dacia Logan',
-    version: 'Base',
-    type: 'Économique',
-    price: 249,
-    image: '/dacia.jpg',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 170,
-    trunkSize: 510
-  },
-  {
-    id: 3,
-    name: 'Stepway',
-    version: 'Base',
-    type: 'Crossover',
-    price: 249,
-    image: '/dacia-Stepway.webp',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 170,
-    trunkSize: 478
   },
   {
     id: 4,
@@ -90,6 +58,70 @@ const cars: Car[] = [
     fuel: 'Gazoil',
     maxSpeed: 180,
     trunkSize: 300
+  },
+  {
+    id: 8,
+    name: 'Citroën C-Elysée',
+    version: 'Base',
+    type: 'Berline',
+    price: 269,
+    image: '/Celyse.jpg',
+    featured: false,
+    transmission: 'Manuelle',
+    seats: 5,
+    luggage: 3,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 180,
+    trunkSize: 506
+  },
+  {
+    id: 9,
+    name: 'Citroën C3',
+    version: 'Base',
+    type: 'Économique',
+    price: 269,
+    image: '/c3.jpg',
+    featured: false,
+    transmission: 'Manuelle',
+    seats: 5,
+    luggage: 2,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 170,
+    trunkSize: 300
+  },
+  {
+    id: 2,
+    name: 'Dacia Logan',
+    version: 'Base',
+    type: 'Économique',
+    price: 300,
+    image: '/dacia.jpg',
+    featured: false,
+    transmission: 'Manuelle',
+    seats: 5,
+    luggage: 3,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 170,
+    trunkSize: 510
+  },
+  {
+    id: 3,
+    name: 'Stepway',
+    version: 'Base',
+    type: 'Crossover',
+    price: 300,
+    image: '/dacia-Stepway.webp',
+    featured: false,
+    transmission: 'Manuelle',
+    seats: 5,
+    luggage: 3,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 170,
+    trunkSize: 478
   },
   {
     id: 5,
@@ -124,54 +156,6 @@ const cars: Car[] = [
     trunkSize: 309
   },
   {
-    id: 7,
-    name: 'Hyundai Tucson',
-    version: 'Premium',
-    type: 'SUV',
-    price: 799,
-    image: '/tucson.jpeg',
-    featured: true,
-    transmission: 'Automatique',
-    seats: 5,
-    luggage: 4,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 200,
-    trunkSize: 620
-  },
-  {
-    id: 8,
-    name: 'Citroën C-Elysée',
-    version: 'Base',
-    type: 'Berline',
-    price: 249,
-    image: '/c3.jpg',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 180,
-    trunkSize: 506
-  },
-  {
-    id: 9,
-    name: 'Citroën C3',
-    version: 'Base',
-    type: 'Économique',
-    price: 269,
-    image: '/Celyse.jpg',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 2,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 170,
-    trunkSize: 300
-  },
-  {
     id: 10,
     name: 'Hyundai i20',
     version: 'Base',
@@ -186,22 +170,6 @@ const cars: Car[] = [
     fuel: 'Gazoil',
     maxSpeed: 170,
     trunkSize: 352
-  },
-  {
-    id: 11,
-    name: 'Hyundai Accent RIA',
-    version: 'Base',
-    type: 'Berline',
-    price: 349,
-    image: '/acc.avif',
-    featured: false,
-    transmission: 'Automatique',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'Gazoil',
-    maxSpeed: 190,
-    trunkSize: 480
   },
   {
     id: 12,
@@ -224,7 +192,7 @@ const cars: Car[] = [
     name: 'Peugeot 208',
     version: 'Base',
     type: 'Économique',
-    price: 299,
+    price: 339,
     image: '/208.jpeg',
     featured: false,
     transmission: 'Manuelle',
@@ -236,11 +204,43 @@ const cars: Car[] = [
     trunkSize: 311
   },
   {
+    id: 11,
+    name: 'Hyundai Accent RIA',
+    version: 'Base',
+    type: 'Berline',
+    price: 349,
+    image: '/acc.avif',
+    featured: false,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 3,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 190,
+    trunkSize: 480
+  },
+  {
+    id: 7,
+    name: 'Hyundai Tucson',
+    version: 'Premium',
+    type: 'SUV',
+    price: 799,
+    image: '/tucson.webp',
+    featured: true,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 4,
+    airConditioning: true,
+    fuel: 'Gazoil',
+    maxSpeed: 200,
+    trunkSize: 620
+  },
+  {
     id: 14,
     name: 'Volkswagen T-Roc',
     version: 'Premium',
     type: 'SUV',
-    price: 699,
+    price: 799,
     image: '/Trok.jpg',
     featured: true,
     transmission: 'Automatique',
@@ -311,6 +311,7 @@ export function MaqdisCarWebsite() {
   const [selectedFilters, setSelectedFilters] = useState({ type: '', featured: false })
   const [selectedCar, setSelectedCar] = useState<Car | null>(null)
   const [showReservationConfirmation, setShowReservationConfirmation] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   // Get unique car types
   const carTypes = Array.from(new Set(cars.map(car => car.type)))
@@ -352,64 +353,163 @@ export function MaqdisCarWebsite() {
     })
   }
 
+  const handleNavigation = (page: string) => {
+    setCurrentPage(page)
+    // Smooth scroll to top
+    if (contentRef.current) {
+      contentRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
-    <div className={`min-h-screen ${currentPage === 'about' ? 'bg-white' : 'bg-gradient-to-r from-[#B8860B] to-[#C0C0C0]'}`}>
-      <div className={`${currentPage === 'about' ? 'bg-gradient-to-b from-[#B8860B] via-[#C0C0C0] to-transparent' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4"> {/* Changed py-6 to py-4 */}
-            <div className="flex items-center -mt-4"> {/* Added -mt-4 */}
-              <Image 
-                src="/jlogo.png" 
-                alt="Joude Car Logo" 
-                width={250} 
-                height={150} 
-                className="mr-2" 
-              />
+    <div ref={contentRef} className={`min-h-screen ${currentPage === 'about' ? 'bg-white' : 'bg-gradient-to-r from-[#B8860B] to-[#C0C0C0]'}`}>
+      <div className="relative">
+        <div className="absolute top-0 left-0 right-0 z-50">
+          <nav className={`${currentPage === 'about' ? 'bg-gradient-to-b from-[#B8860B] via-[#C0C0C0] to-transparent' : ''}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-4">
+                <div className="flex items-center -mt-4">
+                  <Image 
+                    src="/jlogo.png" 
+                    alt="Joude Car Logo" 
+                    width={250} 
+                    height={150} 
+                    className="mr-2" 
+                  />
+                </div>
+                <div className="flex space-x-8">
+                  <button
+                    className={`text-lg ${currentPage === 'home' ? 'text-white font-bold' : 'text-white hover:text-gray-200'}`}
+                    onClick={() => {
+                      if (currentPage !== 'home') {
+                        setCurrentPage('home');
+                        window.scrollTo(0, 0);
+                      }
+                    }}
+                  >
+                    Accueil
+                  </button>
+                  <button
+                    className={`text-lg ${currentPage === 'about' ? 'text-white font-bold' : 'text-white hover:text-gray-200'}`}
+                    onClick={() => {
+                      if (currentPage !== 'about') {
+                        setCurrentPage('about');
+                        window.scrollTo(0, 0);
+                      }
+                    }}
+                  >
+                    À Propos
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="space-x-4">
-              <button
-                className={`text-lg ${currentPage === 'home' ? 'text-white font-bold' : 'text-white hover:text-blue-200'}`}
-                onClick={() => setCurrentPage('home')}
-              >
-                Accueil
-              </button>
-              <button
-                className={`text-lg ${currentPage === 'about' ? 'text-white font-bold' : 'text-white hover:text-blue-200'}`}
-                onClick={() => setCurrentPage('about')}
-              >
-                À Propos
-              </button>
-            </div>
-          </div>
+          </nav>
         </div>
+        <div className="h-24"></div> {/* Spacer to prevent content from hiding under nav */}
       </div>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {currentPage === 'home' && (
           <motion.div
             key="home"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
           >
             <section className="relative h-screen">
-              <div className="absolute inset-0 flex flex-col justify-center items-center z-10">
-                <h2 className="text-5xl font-bold mb-8 text-white">Bienvenue chez <span className="font-bold italic text-gray-200">Joude Car</span></h2>
-                <p className="text-xl mb-8 text-white text-center max-w-2xl">
+              <div className="absolute inset-0 flex flex-col justify-center items-center z-10 -mt-80"> {/* Increased negative margin to -mt-80 for more upward movement */}
+                <h2 className="text-5xl font-bold mb-8 text-white text-center">Bienvenue chez <span className="font-bold italic text-gray-200">Joude Car</span></h2>
+                <p className="text-xl mb-8 text-white text-center max-w-2xl mx-auto">
                   Découvrez notre sélection de voitures de luxe pour une expérience de conduite inoubliable.
                 </p>
-                <button
-                  className="bg-white text-gray-600 px-8 py-3 rounded-full text-xl hover:bg-gray-100 transition duration-300"
+                <motion.button
+                  className="bg-white text-gray-600 px-8 py-3 rounded-full text-xl mx-auto relative overflow-hidden group"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 0 30px rgba(184,134,11,0.7)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{
+                    y: [0, -10, 0],
+                    boxShadow: [
+                      "0 0 10px rgba(184,134,11,0.3)",
+                      "0 0 20px rgba(184,134,11,0.5)",
+                      "0 0 10px rgba(184,134,11,0.3)"
+                    ]
+                  }}
+                  transition={{
+                    y: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    },
+                    boxShadow: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
                   onClick={() => {
                     const catalogElement = document.getElementById('catalog');
                     if (catalogElement) {
-                      catalogElement.scrollIntoView({ behavior: 'smooth' });
+                      catalogElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
                     }
                   }}
                 >
-                  Voir notre catalogue
-                </button>
+                  {/* Continuous shine effect */}
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-continuous-shine" />
+                  </div>
+
+                  {/* Continuous glow effect */}
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#B8860B] to-[#C0C0C0] blur-xl animate-continuous-pulse opacity-30" />
+                  </div>
+
+                  {/* Button content */}
+                  <div className="flex items-center space-x-2 relative z-10">
+                    <span className="relative bg-gradient-to-r from-[#B8860B] to-[#C0C0C0] bg-clip-text">
+                      Voir notre catalogue
+                    </span>
+                    <motion.svg 
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      animate={{
+                        x: [0, 5, 0],
+                        rotate: [0, 15, 0],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="stroke-[#B8860B] transition-colors duration-300"
+                    >
+                      <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
+                      <path d="M13 13l6 6"/>
+                    </motion.svg>
+                  </div>
+                </motion.button>
               </div>
             </section>
 
@@ -476,6 +576,67 @@ export function MaqdisCarWebsite() {
               </div>
             </section>
 
+            <section className="py-16 px-4 md:px-8 bg-gradient-to-r from-[#B8860B] to-[#C0C0C0]">
+              <div className="max-w-7xl mx-auto">
+                <div className="bg-white rounded-lg shadow-xl p-8 md:p-12">
+                  <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Service de Navette Aéroport</h2>
+                  
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="w-full md:w-1/2">
+                      <Image
+                        src="/angad.jpeg"
+                        alt="Aéroport Oujda Angads"
+                        width={500}
+                        height={300}
+                        className="rounded-lg shadow-lg object-cover"
+                      />
+                    </div>
+                    
+                    <div className="w-full md:w-1/2 space-y-6">
+                      <h3 className="text-2xl font-semibold text-gray-800">Transport Aéroport Oujda Angads</h3>
+                      
+                      <p className="text-gray-600">
+                        Pour votre confort, <span className="font-bold italic text-[#B8860B]">Joude Car</span> propose un service de navette depuis et vers l&apos;aéroport d&apos;Oujda Angads.
+                      </p>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-gray-600">Service disponible 24/7</span>
+                        </div>
+                        
+                        <div className="flex items-center space-x-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-gray-600">Véhicules confortables et climatisés</span>
+                        </div>
+                        
+                        <div className="flex items-center space-x-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-gray-600">Suivi des vols en temps réel</span>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-8">
+                        <Button 
+                          className="bg-[#B8860B] hover:bg-[#906E0B] text-white w-full md:w-auto"
+                          onClick={() => window.open('https://wa.me/212625831083', '_blank')}
+                        >
+                          <MessageCircle className="mr-2" />
+                          Réserver une navette
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             {/* Add new map section */}
             <section className="py-16 px-4 md:px-8 bg-white">
               <div className="max-w-7xl mx-auto">
@@ -522,10 +683,10 @@ export function MaqdisCarWebsite() {
         {currentPage === 'about' && (
           <motion.div
             key="about"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
             className="min-h-screen relative overflow-hidden"
           >
             {/* Gradient background for the top part */}
@@ -572,6 +733,9 @@ export function MaqdisCarWebsite() {
                       <li>Un service client disponible 24/7 pour vous assister</li>
                       <li>Des tarifs transparents et compétitifs</li>
                       <li>Une présence dans les principales villes touristiques du Maroc</li>
+                      <li>Siège bébé gratuit pour votre sécurité et confort</li>
+                      <li>Service d'assistance et remorquage disponible</li>
+                      <li>Assurance Tous risques incluse pour votre tranquillité</li>
                       <li>Des conseils personnalisés pour optimiser votre voyage</li>
                     </ul>
                   </motion.div>
@@ -587,7 +751,7 @@ export function MaqdisCarWebsite() {
                     <div>
                       <h4 className="text-xl font-semibold mb-2 text-gray-700">Notre Siège Social</h4>
                       <p className="text-gray-600">
-                        Bd Ennarjis<br />
+                      Av. Yacoub Al Mansour, Oujda<br />
                         Oujda, Maroc
                       </p>
                       <div className="mt-4 space-y-2">
@@ -652,7 +816,7 @@ export function MaqdisCarWebsite() {
                 </svg>
               </a>
               <a 
-                href="https://www.instagram.com/" 
+                href="https://www.instagram.com/joude.car/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-white hover:text-gray-400 transition duration-300"
