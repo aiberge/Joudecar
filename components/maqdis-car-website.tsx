@@ -353,22 +353,6 @@ export function MaqdisCarWebsite() {
     })
   }
 
-  const handleNavigation = (page: string) => {
-    setCurrentPage(page)
-    // Smooth scroll to top
-    if (contentRef.current) {
-      contentRef.current.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
-    }
-  }
-
   return (
     <div ref={contentRef} className={`min-h-screen ${currentPage === 'about' ? 'bg-white' : 'bg-gradient-to-r from-[#B8860B] to-[#C0C0C0]'}`}>
       <div className="relative">
@@ -734,7 +718,7 @@ export function MaqdisCarWebsite() {
                       <li>Des tarifs transparents et compétitifs</li>
                       <li>Une présence dans les principales villes touristiques du Maroc</li>
                       <li>Siège bébé gratuit pour votre sécurité et confort</li>
-                      <li>Service d'assistance et remorquage disponible</li>
+                      <li>Service d&apos;assistance et remorquage disponible</li>
                       <li>Assurance Tous risques incluse pour votre tranquillité</li>
                       <li>Des conseils personnalisés pour optimiser votre voyage</li>
                     </ul>
