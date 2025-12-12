@@ -31,7 +31,7 @@ const cars: Car[] = [
     id: 1,
     name: 'Kia Picanto',
     version: 'Base',
-    type: 'Économique', 
+    type: 'Économique',
     price: 249,
     image: '/kia.jpg',
     featured: true,
@@ -361,12 +361,12 @@ export function MaqdisCarWebsite() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center py-4">
                 <div className="flex items-center -mt-4">
-                  <Image 
-                    src="/jlogo.png" 
-                    alt="Joude Car Logo" 
-                    width={250} 
-                    height={150} 
-                    className="mr-2" 
+                  <Image
+                    src="/jlogo.png"
+                    alt="Joude Car Logo"
+                    width={250}
+                    height={150}
+                    className="mr-2"
                   />
                 </div>
                 <div className="flex space-x-8">
@@ -417,7 +417,7 @@ export function MaqdisCarWebsite() {
                 </p>
                 <motion.button
                   className="bg-white text-gray-600 px-8 py-3 rounded-full text-xl mx-auto relative overflow-hidden group"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     boxShadow: "0 0 30px rgba(184,134,11,0.7)"
                   }}
@@ -445,7 +445,7 @@ export function MaqdisCarWebsite() {
                   onClick={() => {
                     const catalogElement = document.getElementById('catalog');
                     if (catalogElement) {
-                      catalogElement.scrollIntoView({ 
+                      catalogElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                       });
@@ -467,7 +467,7 @@ export function MaqdisCarWebsite() {
                     <span className="relative bg-gradient-to-r from-[#B8860B] to-[#C0C0C0] bg-clip-text">
                       Voir notre catalogue
                     </span>
-                    <motion.svg 
+                    <motion.svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -489,8 +489,8 @@ export function MaqdisCarWebsite() {
                       }}
                       className="stroke-[#B8860B] transition-colors duration-300"
                     >
-                      <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
-                      <path d="M13 13l6 6"/>
+                      <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                      <path d="M13 13l6 6" />
                     </motion.svg>
                   </div>
                 </motion.button>
@@ -499,7 +499,7 @@ export function MaqdisCarWebsite() {
 
             <section id="catalog" className="py-16 px-4 md:px-8 bg-gray-100">
               <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">Notre Catalogue</h2>
-              
+
               <div className="mb-12 max-w-3xl mx-auto">
                 <div className="bg-white p-6 rounded-lg shadow-lg">
                   <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">Filtres</h3>
@@ -525,35 +525,58 @@ export function MaqdisCarWebsite() {
                 {filteredCars.map((car) => (
                   <motion.div
                     key={car.id}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    className="bg-white rounded-[32px] p-5 shadow-sm border border-gray-100 relative group hover:shadow-xl transition-all duration-300"
+                    whileHover={{ y: -5 }}
                   >
-                    <div className="relative h-48">
-                      <Image 
-                        src={car.image} 
-                        alt={car.name} 
-                        fill 
-                        style={{ objectFit: 'cover' }}
+                    {/* Badge Populaire */}
+                    {car.featured && (
+                      <div className="absolute top-8 right-8 z-10">
+                        <span className="bg-white px-4 py-1.5 rounded-full text-xs font-bold text-gray-900 shadow-sm border border-gray-100">
+                          Populaire
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Image Container - Added light gray background for better contrast */}
+                    <div className="relative h-56 mb-6 bg-[#F8F9FA] rounded-[24px] overflow-hidden flex items-center justify-center">
+                      <Image
+                        src={car.image}
+                        alt={car.name}
+                        fill
+                        style={{ objectFit: 'contain' }}
+                        className="p-4 transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>
-                    <div className="p-4">
-                      <h3 className="text-xl font-semibold mb-2 text-gray-800">{car.name}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{car.version}</p>
-                      <div className="flex justify-between items-center mb-4">
-                        <div className="flex items-center">
-                          <span className="text-gray-600">{car.type}</span>
+
+                    {/* Content */}
+                    <div>
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900 mb-1">{car.name}</h3>
+                          <div className="flex items-center text-sm text-gray-500 font-medium">
+                            <span>{car.transmission}</span>
+                            <span className="mx-2">•</span>
+                            <span>{car.fuel}</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-[22px] font-bold text-[#D4AF37] leading-none">
+                            {car.price.toLocaleString()} MAD
+                          </div>
+                          <span className="text-xs text-gray-400 font-medium">/ jour</span>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xl font-bold text-gray-600">{car.price.toLocaleString()} MAD</span>
-                        <Button
-                          className="bg-gray-600 hover:bg-gray-700 text-white"
-                          onClick={() => openCarDetails(car)}
-                        >
-                          Voir les détails
-                        </Button>
-                      </div>
+
+                      {/* Dotted Separator */}
+                      <div className="w-full border-t-2 border-dashed border-gray-100 my-6"></div>
+
+                      {/* Action Button */}
+                      <Button
+                        className="w-full bg-black hover:bg-gray-800 text-white rounded-full py-6 font-bold text-sm tracking-wide transition-colors duration-300"
+                        onClick={() => openCarDetails(car)}
+                      >
+                        Réserver ce véhicule
+                      </Button>
                     </div>
                   </motion.div>
                 ))}
@@ -564,7 +587,7 @@ export function MaqdisCarWebsite() {
               <div className="max-w-7xl mx-auto">
                 <div className="bg-white rounded-lg shadow-xl p-8 md:p-12">
                   <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Service de Navette Aéroport</h2>
-                  
+
                   <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="w-full md:w-1/2">
                       <Image
@@ -575,14 +598,14 @@ export function MaqdisCarWebsite() {
                         className="rounded-lg shadow-lg object-cover"
                       />
                     </div>
-                    
+
                     <div className="w-full md:w-1/2 space-y-6">
                       <h3 className="text-2xl font-semibold text-gray-800">Transport Aéroport Oujda Angads</h3>
-                      
+
                       <p className="text-gray-600">
                         Pour votre confort, <span className="font-bold italic text-[#B8860B]">Joude Car</span> propose un service de navette depuis et vers l&apos;aéroport d&apos;Oujda Angads.
                       </p>
-                      
+
                       <div className="space-y-4">
                         <div className="flex items-center space-x-3">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -590,14 +613,14 @@ export function MaqdisCarWebsite() {
                           </svg>
                           <span className="text-gray-600">Service disponible 24/7</span>
                         </div>
-                        
+
                         <div className="flex items-center space-x-3">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                           <span className="text-gray-600">Véhicules confortables et climatisés</span>
                         </div>
-                        
+
                         <div className="flex items-center space-x-3">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#B8860B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -605,9 +628,9 @@ export function MaqdisCarWebsite() {
                           <span className="text-gray-600">Suivi des vols en temps réel</span>
                         </div>
                       </div>
-                      
+
                       <div className="mt-8">
-                        <Button 
+                        <Button
                           className="bg-[#B8860B] hover:bg-[#906E0B] text-white w-full md:w-auto"
                           onClick={() => window.open('https://wa.me/212625831083', '_blank')}
                         >
@@ -647,13 +670,13 @@ export function MaqdisCarWebsite() {
                     </div>
                   </div>
                   <div className="w-full md:w-1/2 rounded-lg overflow-hidden shadow-lg">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.535075263833!2d-1.8998052880310843!3d34.66644267281907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd787d450f13d7a3%3A0x8c9f27075bc0ed37!2sJoude%20car!5e0!3m2!1sfr!2sma!4v1730114747553!5m2!1sfr!2sma" 
-                      width="100%" 
-                      height="450" 
-                      style={{ border: 0 }} 
-                      allowFullScreen 
-                      loading="lazy" 
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.535075263833!2d-1.8998052880310843!3d34.66644267281907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd787d450f13d7a3%3A0x8c9f27075bc0ed37!2sJoude%20car!5e0!3m2!1sfr!2sma!4v1730114747553!5m2!1sfr!2sma"
+                      width="100%"
+                      height="450"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       className="rounded-lg"
                     />
@@ -735,7 +758,7 @@ export function MaqdisCarWebsite() {
                     <div>
                       <h4 className="text-xl font-semibold mb-2 text-gray-700">Notre Siège Social</h4>
                       <p className="text-gray-600">
-                      Av. Yacoub Al Mansour, Oujda<br />
+                        Av. Yacoub Al Mansour, Oujda<br />
                         Oujda, Maroc
                       </p>
                       <div className="mt-4 space-y-2">
@@ -769,10 +792,10 @@ export function MaqdisCarWebsite() {
                 </motion.div>
               </div>
             </div>
-            
+
             {/* Add BrandsSection here, just before the closing div */}
             <BrandsSection />
-            
+
             {/* Add padding at the bottom */}
             <div className="pb-20"></div>
           </motion.div>
@@ -789,20 +812,20 @@ export function MaqdisCarWebsite() {
           <div className="w-full md:w-1/3">
             <h4 className="text-lg font-semibold mb-2">Suivez-nous</h4>
             <div className="flex space-x-4">
-              <a 
-                href="https://www.facebook.com/JoudeCar/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.facebook.com/JoudeCar/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-gray-400 transition duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
                 </svg>
               </a>
-              <a 
-                href="https://www.instagram.com/joude.car/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/joude.car/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-gray-400 transition duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -825,10 +848,10 @@ export function MaqdisCarWebsite() {
             </DialogTitle>
             <DialogDescription>
               <div className="mt-4 relative h-64 rounded-lg overflow-hidden">
-                <Image 
-                  src={selectedCar?.image || ''} 
-                  alt={selectedCar?.name || ''} 
-                  fill 
+                <Image
+                  src={selectedCar?.image || ''}
+                  alt={selectedCar?.name || ''}
+                  fill
                   style={{ objectFit: 'cover' }}
                 />
               </div>
@@ -903,7 +926,7 @@ export function MaqdisCarWebsite() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
- 
+
       <ToastContainer />
     </div>
   )
